@@ -1,0 +1,30 @@
+
+<div class="modal fade" id="get_coordinate" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:rgba(40, 40, 40, 1); color:#FFF">
+        <button type="button" class="close " data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="confirmLabel">Coordninate Name</h4>
+      </div>
+      <div class="modal-body">
+
+    <form method="get" class="form-horizontal" id="save_area_f" action="javascript:saveAreaName()">{% csrf_token %}
+         
+      
+         
+        <div class="form-group">
+          <label class="col-sm-2"> Coordninate Name : </label>
+          <div class="col-sm-5"> <input required="True" type="text" id="area_name" style="max-width:380px; width: 380px " class="form-control" value="" /> </div>
+        </div>
+
+        
+   
+      <div class="modal-footer">
+        <button id="voucher_close" type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button onclick="javascript:createFile()" type="submit" id="save_area_btn" data-target="success"  data-dismiss="modal" class="btn btn-primary" >Save</button>
+     </div>
+    </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <link href="/static/css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
+	  <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+	   
+  </head>
+
+  <body id="main-body">
+
+  	<div id="map_save" class="col-sm-12">
+  		<div class="col-sm-4"> 
+  			<h5> Text File Input:  </h5>
+  				<input  type="file" name="upload" id="upload" >
+				<a  href="javascript:readText(upload);"><button id="btn-custom" class="btn btn-warning" >Look</button></a>
+				<a href="javascript:saveMultipleArea();" data-toggle="modal" ><button id="btn-custom" class="btn btn-warning"> Save Multiple Area?</button></a>
+  				<br>
+  				<br>
+  				<div>  <span> Mouse Pointer Coordinates </span>  </div>
+  				<div  class+"col-sm-4" id="latitude" ></div>
+  				<div  class+"col-sm-4" id="longitude" ></div>
+  		</div>
+
+  		<div class="col-sm-4"> 
+  		<h5> Manual Input:  </h5>
+  				<div >	Area (grey area): <span id="span-area">0</span> H;</div>
+	  			<div > <a href="javascript:newPlot();"><button id="btn-custom" class="btn btn-warning"> New Plot </button></a>
+						<br>
+					<a href="" data-toggle="modal" data-target="#save_area"><button id="btn-custom" class="btn btn-warning"> Save this Area?</button></a>
+
+			   		<br />
+			   		<a href="" data-toggle="modal" data-target="#number_of_points"><button id="btn-custom" class="btn btn-warning"> Input coordinates</button></a>
+			   
+			   		<br />
+			    	<a href="javascript:measureReset();"><button id="btn-custom" style="margin-bottom: 10px" class="btn btn-danger"> Reset Measure </button> </a>
+			    	<br/>
+
+		    	</div>
+		    	
+  			
+		
+
+  		</div>
+  		<div class="col-sm-4"> 
+			<form action="javascript:search_name()" class="navbar-form navbar-left" >
+				<div  class="form-group">
+					<input id="search_name" type="text" class="form-control" placeholder="Search">
+				</div>
+				<a href="javascript:search_name()">
+					<button id="search-btn-header" class="btn btn-primary">Find it!</button> </a>
+			</form>
+		<div id="result_table">
+	  		<table class="table table-condensed table-hover" >
+	  			<thead>
+	  				<th>Area Name</th>
+	  				<th>  </th>
+	  			</thead>
+	  			<tbody>
+	  				{% for x in area_name %}
+	  					<tr style="cursor:pointer" onclick="javascript:getAreaName({{x.id}});"> 
+	  						<td>{{x.name}} </td>
+	  						<td> </td>
+	  					</tr>
+	  				{% endfor %}
+	  			</tbody>
+	  		</table>
+  		</div>
+		<!--ul class="pager">
+		  {% if area_name.has_previous %}
+		    <li class="previous"><a href="/?{{ query_params.urlencode }}&amp;page={{ area_name.previous_page_number }}">&laquo; Previous</a></li>
+		  {% else %}
+		    <li class="previous disabled"><a href="#">&laquo; Previous</a></li>
+		  {% endif %}
+		    <span class="current">
+		        Page {{area_name.number}} of {{area_name.paginator.num_pages}}.
+		  </span>
+		  {% if area_name.has_next %}
+		    <li class="next"><a href="/?{{ query_params.urlencode }}&amp;page={{ area_name.next_page_number }}">Next &raquo;</a></li>
+		  {% else %}
+		    <li class="next disabled"><a href="#">Next &raquo;</a></li>
+		  {% endif %}
+		</ul-->
+		
+
+  		</div>
+  	</div>
+  	<div  class="col-sm-12" > 
+  			<div   class="col-sm-10" > 
+  				<div class="col-sm-5" id="lat_number"> </div>
+  				<div class="col-sm-5" id="lng_number"> </div>
+  			</div>
+  	</div>
+  	<br>
+  	<div  class="col-sm-12" ></div>
+		  {% include 'save_area.html' %}
+		  {% include 'number_of_coord.html' %}
+		  <br/>
+		  <br/>
+		 <div class+"col-sm-12" >
+		 	<div style="width: 880px; height: 450px" class="col-sm-6" id="map-canvas"></div>
+		 	<div  class+"col-sm-6" id="area_result" > </div> <br>
+		 </div>
+		
+		
+  </body>
+  	    <script type="text/javascript" src="/static/js/jquery.min.js"></script>  
+		<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.6&sensor=false&libraries=geometry"></script>  
+
+		<script type="text/javascript" src="/static/js/mals.js"></script>
+</html>

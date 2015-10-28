@@ -1,0 +1,47 @@
+<div class="col-sm-12">
+  		<div class="col-sm-4"> 
+  			<h5> Text File Input:  </h5>
+  				<input  type="file" name="upload" id="upload" >
+				<a  href="javascript:readText(upload);"><button id="btn-custom" class="btn btn-warning" >Look</button></a>
+				<a href="javascript:saveMultipleArea();" data-toggle="modal" ><button id="btn-custom" class="btn btn-warning"> Save Multiple Area?</button></a>
+  		</div>
+
+  		<div class="col-sm-4"> 
+  		<h5> Manual Input:  </h5>
+  				<div >	Area (grey area): <span id="span-area">0</span> sqm;</div>
+	  			<div > <a href="javascript:newPlot();"><button id="btn-custom" class="btn btn-warning"> New Plot </button></a>
+						<br>
+					<a href="" data-toggle="modal" data-target="#save_area"><button id="btn-custom" class="btn btn-warning"> Save this Area?</button></a>
+			   
+			   		<br />
+			    	<a href="javascript:measureReset();"><button id="btn-custom" style="margin-bottom: 10px" class="btn btn-danger"> Reset Measure </button> </a>
+			    	<br/>
+		    	</div>
+		    	
+  			
+		
+
+  		</div>
+  		<div class="col-sm-4"> 
+  		<table class="table table-condensed table-hover" >
+  			<thead>
+  				<th>Area Name</th>
+  				<th>  </th>
+  			</thead>
+  			<tbody>
+  				{% for x in area_name %}
+  					<tr style="cursor:pointer" onclick="javascript:getAreaName({{x.id}});"> 
+  						<td>{{x.name}} </td>
+  						<td> </td>
+  					</tr>
+  				{% endfor %}
+  			</tbody>
+  		</table>
+		
+
+  		</div>
+  	</div>
+		  {% include 'save_area.html' %}
+		  <br/>
+
+		<div id="map-canvas"></div>
