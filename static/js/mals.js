@@ -45,7 +45,7 @@ function readText(that){
 					              	}	
 
 					              	frst_cor = 0;
-					              	geo_coord_save.push(new_coord[0]+','+new_coord[1]);
+					              	geo_coord_save.push(new_coord[0]+','+new_coord[1]+','+new_coord[2]+','+new_coord[3]+','+new_coord[4]+','+new_coord[5]);
 					              	newPlot();
 
 					            }else{
@@ -194,7 +194,7 @@ function search_name(){
 
 function saveAreaName(){
 	
-    $.get('/save_area', {area_name:$('#area_name').val(), coordinates:geo_coord}, function(data){
+    $.get('/save_area', {sitio:$('#sitio').val(),barangay:$('#barangay').val(),municipality:$('#municipality').val(),prov:$('#prov').val(),prov:$('#prov').val(),area_name:$('#area_name').val(), coordinates:geo_coord}, function(data){
      $('#map_save ').html(data);
       
     });
@@ -234,8 +234,16 @@ function getAreaName(id) {
       //alert(data.coordins);
       
       name_area = data.area_name;
+      sitio = data.sitio;
+      barangay = data.barangay;
+      municipality = data.municipality;
+      province = data.province;
       data = data.coordins;
-       $("#area_result").append(" <b> Area Name: <span>"+ name_area+" </span> </b>");
+       $("#area_result").append(" <b> Owner Name: <span>"+ name_area+" </span> </b><br>");
+       $("#area_result").append(" <b> Sitio: <span>"+ sitio+" </span> </b><br>");
+       $("#area_result").append(" <b> Barangay: <span>"+ barangay+" </span> </b><br>");
+       $("#area_result").append(" <b> Municipality: <span>"+ municipality+" </span> </b><br>");
+       $("#area_result").append(" <b> Province: <span>"+ province+" </span> </b><br>");
       $("#area_result").append(" <table border='1' > <thead > <th style='padding-right: 6px; padding-left: 6px'>Corner</th> <th style='padding-right: 6px; padding-left: 6px'>Longitude</th><th style='padding-right: 6px; padding-left: 6px'>Latitude</th>  </thead> <tbody id='result_td'> </tbody> </table>");
       var corner = 0 
      	flightPlanCoordinates = [

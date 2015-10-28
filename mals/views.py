@@ -59,10 +59,9 @@ def save_multiple_area(request):
 
 	for x in coordinates:
 		x = x.split(',')
-		print x[0], x[1]
 		if x != "":
 			if x[0] == 'area name':
-				area_save = AreaName(name=x[1])
+				area_save = AreaName(name=x[1],sitio=x[2],barangay=x[3],municipality=x[4],province=x[5])
 				area_save.save()
 			else:
 				geo_save=GeographicalCoordinates(area_id=area_save.id,lat=x[0], lng=x[1])
@@ -77,10 +76,14 @@ def save_area(request):
 	context = RequestContext(request)
 	coordinates = request.GET.getlist('coordinates[]')
 	area_name = request.GET.get('area_name')
+	prov = request.GET.get('prov')
+	sitio = request.GET.get('sitio')
+	barangay = request.GET.get('barangay')
+	municipality = request.GET.get('municipality')
 	area_value = request.GET.get('_area_value')
 
 
-	area_save = AreaName(name=area_name)
+	area_save = AreaName(name=area_name, sitio=sitio, barangay=barangay, municipality=municipality, province=prov)
 	area_save.save()
 
 	for x in coordinates:
@@ -107,7 +110,13 @@ def getAreaName(request):
 	for x in geo_area:
 		areas.append([x.lat+','+x.lng])
 
-	print area_name.name
-	data ={ 'coordins': areas, 'area_name':area_name.name}
+	
+	data ={ 'coordins': areas, 
+			'area_name':area_name.name,
+			'sitio':area_name.sitio,
+			'barangay':area_name.barangay,
+			'municipality':area_name.municipality,
+			'province':area_name.province
+			}
 	json_response = json.dumps(data)
 	return HttpResponse(json_response, content_type="application/json")
